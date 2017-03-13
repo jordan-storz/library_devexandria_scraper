@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
+    "cors": "^2.8.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "form-scraper": "^0.0.4",
