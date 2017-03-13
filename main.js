@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.post('/test', (req, res, next) => {
+app.post('/populate', (req, res, next) => {
   validateSource.execute(req.body.url)
     .then(validationSwitch)
     .catch(errorDispatch(res))
