@@ -16,7 +16,6 @@ module.exports = (function formTransmitter() {
     return formScraper
       .submitForm(formValues, formScraper.provideForm(formStructure), pRequest)
       .then(R.prop('body'))
-      // .then(R.tap(console.log));
   }
 
   return {
