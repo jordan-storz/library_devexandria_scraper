@@ -1,33 +1,45 @@
 const R = require('ramda');
 const tagScout = require('./tag-scout');
+const keywordCook = require('./keyword-cook');
 
 module.exports = (function() {
   const grabMetas = tagScout.grabTags('meta');
 
-  reduceByName = R.curry((name, arr) => {
+  const reduceDescription = arr => {
     return R.compose(
       R.head,
-      R.pluck('content'),
+      R.prop('content'),
       R.invert,
-      R.filter(R.has(name)),
-      R.invert,
-      R.pick(['name', 'content'])
+      R.head,
+      R.filter(R.has('description')),
+      R.map(R.invert),
+      R.identity,
+      R.pluck('attribs')
     )(arr);
-  });
+  };
 
-  const reduceDescription = reduceByName('description');
-  const reduceKeywords = reduceByName('keywords');
+  const reduceKeywords = arr => {
+    return R.compose(
+      keywordCook.reduceKeywords,
+      R.prop('content'),
+      R.invert,
+      R.head,
+      R.filter(R.has('keywords')),
+      R.map(R.invert),
+      R.pluck('attribs')
+    )(arr);
+  }
 
   const grabMetaTags = (body) => {
     const metaArray = grabMetas(body);
     return {
-      description: reduceDescription(metaArray),
-      keywords: reduceKeywords(metaArray)
+      content: reduceDescription(metaArray),
+      tags: reduceKeywords(metaArray)
     };
   }
 
   return {
     grabMetaTags
   }
-  
+
 }());

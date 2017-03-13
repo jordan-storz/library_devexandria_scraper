@@ -3,8 +3,9 @@ const R = require('ramda');
 
 module.exports = (function htmlSwiper() {
   const getPage = (url) => {
-    promiseGet(url)
-      .then(R.prop('body'))
+    console.log('EXECUTING GET PAGE');
+    return promiseGet(url)
+      .then(R.identity)
       .catch(console.error);
   }
 

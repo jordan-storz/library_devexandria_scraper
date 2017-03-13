@@ -7,3 +7,5 @@ const promiseGet = (url) => {
     });
   });
 }
+
+module.exports = promiseGet;
