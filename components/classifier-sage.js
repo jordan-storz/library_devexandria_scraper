@@ -2,7 +2,7 @@ const R = require('ramda');
 
 module.exports = (function() {
   const isComputerEnough =
-    R.either(R.equals(10), R.flip(R.gt)(88));
+    R.either(R.equals(10), R.flip(R.gt)(1));
 
   const resultMessage = bool => {
     return bool ?
