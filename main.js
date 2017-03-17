@@ -26,14 +26,6 @@ app.post('/populate', (req, res, next) => {
       let {content, tags} = captureContent.execute(body);
       res.json({title, content, tags});
     });
-
-
-
-
-
-  // captureTitle.execute(req.body.url).then(result => {
-  //   res.json(result);
-  // });
 });
 
 
