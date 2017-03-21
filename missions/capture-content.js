@@ -1,21 +1,22 @@
 const R = require('ramda');
 const cheerio = require('cheerio');
 const metaWorker = require('../components/meta-worker');
+const paragraphWorker = require('../components/paragraph-worker');
 
 module.exports = (function captureContent() {
-
-  const hierarchy = [
-    'meta[name="content"]',
-    'h1',
-    'h2',
-    'h3',
-    'p'
-  ]
 
   const execute = body => {
     let $ = cheerio.load(body);
     let metas = metaWorker.grabMetaTags(body);
-    return metas;
+    let headings = paragraphWorker.grabParagraph(body);
+    let content;
+    if (metas.content.length < 1) {
+      console.log('meta not long enough');
+      content = headings;
+    } else {
+      content = metas.content;
+    }
+    return {content, tags: metas.tags};
   }
 
   return {

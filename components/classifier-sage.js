@@ -21,6 +21,7 @@ module.exports = (function() {
   const validate =
     val => R.compose(
       resultMessage,
+      R.tap(console.log),
       isComputerEnough,
       assessVal
       )(val);

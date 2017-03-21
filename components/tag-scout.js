@@ -7,7 +7,13 @@ module.exports = (function() {
     return Array.from($(selector));
   });
 
+  const grabRawTags = R.curry((selector, body) => {
+    let $ = cheerio.load(body);
+    return $(selector);
+  })
+
   return {
-    grabTags
+    grabTags,
+    grabRawTags
   };
 }());
